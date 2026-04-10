@@ -1,0 +1,144 @@
+/* --- 1. TELAS GRANDES (1400px ou mais) --- */
+/* Limita a largura e centraliza a "folha" do site */
+@media (min-width: 1400px) {
+    body {
+        max-width: 1400px;
+        margin: 0 auto;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .head {
+        max-width: 1400px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* --- 2. TRANSIÇÃO PARA TABLETS (Até 900px) --- */
+@media (max-width: 900px) {
+    #sobre .sobre-mim {
+        font-size: 18px;
+        padding: 0 20px;
+    }
+
+    .head h1 {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+}
+
+/* --- 3. TELAS MENORES (860px ou menos) --- */
+@media (max-width: 860px) {
+
+    .head {
+        padding: 15px;
+        height: 80px;
+    }
+
+    .head h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .nav ul {
+        gap: 10px;
+    }
+
+    .nav ul li a {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    /* Empilhamento das seções */
+    #sobre {
+        flex-direction: column;
+        height: auto;
+        padding: 120px 20px 60px;
+        text-align: center;
+    }
+
+    #sobre .img-perfil {
+        width: 200px;
+        height: 200px;
+        order: -1;
+    }
+
+    #formacao {
+        flex-direction: column;
+        padding: 60px 20px;
+    }
+
+    #portfolio ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #portfolio ul li {
+        max-width: 90%;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+/* --- QUEBRA 1: 760px (Header vira bloco) --- */
+@media (max-width: 760px) {
+    .head {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+
+    .nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    body {
+        scroll-padding-top: 160px;
+    }
+}
+
+/*--- QUEBRA 2: 435px (Menu vira hambúrguer) ---*/
+@media (max-width: 435px) {
+    .menu-btn {
+        display: block;
+    }
+
+    .head {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 30px 20px;
+    }
+
+    .nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--cabecalho-rodape);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav ul.active {
+        display: flex;
+    }
+
+    .nav ul li {
+        margin: 10px 0;
+    }
+
+    .nav ul li:last-child {
+        order: -1;
+    }
+}

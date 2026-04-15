@@ -22,13 +22,59 @@ btnTema.addEventListener('click', () => {
     }
 });
 
+// --- Envio real de e-mail usando Formspree (Comentado para uso futuro) ---
+// // --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (FORMSPREE) ---
+// const formulario = document.getElementById('formContato');
+// const feedback = document.getElementById('feedback');
 
-// --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (FORMSPREE) ---
+// formulario.addEventListener('submit', async function(event) {
+//     event.preventDefault(); 
+
+//     const nome = document.getElementById('nome').value.trim();
+//     const email = document.getElementById('email').value.trim();
+//     const mensagem = document.getElementById('mensagem').value.trim();
+
+//     if (!nome || !email || !mensagem) {
+//         alert("Por favor, preencha todos os campos obrigatórios!");
+//         return;
+//     }
+
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     if (!emailRegex.test(email)) {
+//         alert("Insira um e-mail válido.");
+//         return;
+//     }
+
+//     const data = new FormData(formulario);
+//     feedback.innerText = "Enviando...";
+
+//     try {
+//         const response = await fetch('https://formspree.io/f/xgopjolo', {
+//             method: 'POST',
+//             body: data,
+//             headers: { 'Accept': 'application/json' }
+//         });
+
+//         if (response.ok) {
+//             feedback.style.color = "green";
+//             feedback.innerText = "Mensagem enviada com sucesso!";
+//             alert("Mensagem enviada com sucesso! Logo você receberá um e-mail de resposta.");
+//             formulario.reset();
+//         } else {
+//             throw new Error();
+//         }
+//     } catch (error) {
+//         feedback.style.color = "red";
+//         feedback.innerText = "Ops! Ocorreu um erro ao enviar.";
+//     }
+// });
+
+// --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (SIMULADO) ---
 const formulario = document.getElementById('formContato');
 const feedback = document.getElementById('feedback');
 
-formulario.addEventListener('submit', async function(event) {
-    event.preventDefault(); 
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o recarregamento da página
 
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -45,28 +91,28 @@ formulario.addEventListener('submit', async function(event) {
         return;
     }
 
-    const data = new FormData(formulario);
-    feedback.innerText = "Enviando...";
+    // --- LÓGICA DO "SIMULADO" ---
+    feedback.style.color = "blue";
+    feedback.innerText = "Processando envio...";
+    
+    // Desativa o botão para o usuário não clicar duas vezes
+    const btn = document.getElementById('btnEnviar');
+    btn.disabled = true;
+    btn.innerText = "Enviando...";
 
-    try {
-        const response = await fetch('https://formspree.io/f/xgopjolo', {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-            feedback.style.color = "green";
-            feedback.innerText = "Mensagem enviada com sucesso!";
-            alert("Mensagem enviada com sucesso! Logo você receberá um e-mail de resposta.");
-            formulario.reset();
-        } else {
-            throw new Error();
-        }
-    } catch (error) {
-        feedback.style.color = "red";
-        feedback.innerText = "Ops! Ocorreu um erro ao enviar.";
-    }
+    // Simula um atraso de 2 segundos (como se fosse uma requisição real)
+    setTimeout(() => {
+        // Feedback de Sucesso
+        feedback.style.color = "green";
+        feedback.innerText = "Mensagem enviada com sucesso!";
+        
+        alert(`Obrigado, ${nome}! Sua mensagem foi enviada com sucesso!`);
+        
+        // Limpa o formulário e reseta o botão
+        formulario.reset();
+        btn.disabled = false;
+        btn.innerText = "Enviar";
+    }, 2000); 
 });
 
 
@@ -91,20 +137,27 @@ const modal = document.getElementById("meuModal");
 const imgModal = document.getElementById("imgModal");
 const spanFechar = document.querySelector(".fechar");
 
-// Filtro para abrir no modal apenas imagens de projetos ou certificados
-const imagensClicaveis = document.querySelectorAll('#portfolio img, .img-certificado');
+const abrirModal = (src) => {
+    modal.style.display = "block";
+    imgModal.src = src;
+};
 
-imagensClicaveis.forEach(imagem => {
-    imagem.addEventListener('click', function() {
-        modal.style.display = "block";
-        imgModal.src = this.src;
+const imagensValidas = document.querySelectorAll('#portfolio img, img.img-certificado');
+
+imagensValidas.forEach(img => {
+    // Garante que o cursor seja a lupa para indicar que é clicável
+    img.style.cursor = "zoom-in";
+    
+    img.addEventListener('click', function() {
+        abrirModal(this.src);
     });
 });
 
+// Fechar o modal
 spanFechar.onclick = () => modal.style.display = "none";
 window.onclick = (event) => {
     if (event.target == modal) modal.style.display = "none";
-}
+};
 
 // --- 5. LÓGICA DO MENU MOBILE ---
 const btnMenu = document.getElementById('menu-mobile');

@@ -159,11 +159,29 @@ body {
 #formacao ul li div {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 #formacao ul li:hover {
     background-color: #b9941a;
     color: white;
+}
+
+.info-conclusao {
+    background-color: rgba(185, 148, 26, 0.1);
+    padding: 15px;
+    border-left: 4px solid #b9941a;
+    font-style: italic;
+    color: var(--texto-cor);
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#formacao ul li:hover .info-conclusao {
+    color: white;
+    border-left-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .img-certificado {
@@ -175,7 +193,11 @@ body {
     border-radius: 10px;
 }
 
-.mostrar {
+img.img-certificado {
+    cursor: zoom-in;
+}
+
+.img-certificado.mostrar {
     display: block;
 }
 

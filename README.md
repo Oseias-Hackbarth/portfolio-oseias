@@ -13,7 +13,7 @@ Para este projeto, foram utilizadas tecnologias nativas (Vanilla), sem o uso de 
 * **HTML5**: Estrutura semântica do site.
 * **CSS3**: Estilização, variáveis para Dark Mode e responsividade avançada.
 * **JavaScript (Vanilla)**: Lógica de troca de temas, menu hambúrguer, acordeão de certificados e validação de formulário.
-<!--* **Formspree**: Integração para envio de e-mails via formulário.-->
+* **Formspree**: Integração para envio de e-mails via formulário.
 * **Font Awesome**: Ícones interativos.
 
 ---

@@ -22,59 +22,13 @@ btnTema.addEventListener('click', () => {
     }
 });
 
-// --- Envio real de e-mail usando Formspree (Comentado para uso futuro) ---
-// // --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (FORMSPREE) ---
-// const formulario = document.getElementById('formContato');
-// const feedback = document.getElementById('feedback');
 
-// formulario.addEventListener('submit', async function(event) {
-//     event.preventDefault(); 
-
-//     const nome = document.getElementById('nome').value.trim();
-//     const email = document.getElementById('email').value.trim();
-//     const mensagem = document.getElementById('mensagem').value.trim();
-
-//     if (!nome || !email || !mensagem) {
-//         alert("Por favor, preencha todos os campos obrigatórios!");
-//         return;
-//     }
-
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     if (!emailRegex.test(email)) {
-//         alert("Insira um e-mail válido.");
-//         return;
-//     }
-
-//     const data = new FormData(formulario);
-//     feedback.innerText = "Enviando...";
-
-//     try {
-//         const response = await fetch('https://formspree.io/f/xgopjolo', {
-//             method: 'POST',
-//             body: data,
-//             headers: { 'Accept': 'application/json' }
-//         });
-
-//         if (response.ok) {
-//             feedback.style.color = "green";
-//             feedback.innerText = "Mensagem enviada com sucesso!";
-//             alert("Mensagem enviada com sucesso! Logo você receberá um e-mail de resposta.");
-//             formulario.reset();
-//         } else {
-//             throw new Error();
-//         }
-//     } catch (error) {
-//         feedback.style.color = "red";
-//         feedback.innerText = "Ops! Ocorreu um erro ao enviar.";
-//     }
-// });
-
-// --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (SIMULADO) ---
+// --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (FORMSPREE) ---
 const formulario = document.getElementById('formContato');
 const feedback = document.getElementById('feedback');
 
-formulario.addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o recarregamento da página
+formulario.addEventListener('submit', async function(event) {
+    event.preventDefault(); 
 
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -91,29 +45,75 @@ formulario.addEventListener('submit', function(event) {
         return;
     }
 
-    // --- LÓGICA DO "SIMULADO" ---
-    feedback.style.color = "blue";
-    feedback.innerText = "Processando envio...";
-    
-    // Desativa o botão para o usuário não clicar duas vezes
-    const btn = document.getElementById('btnEnviar');
-    btn.disabled = true;
-    btn.innerText = "Enviando...";
+    const data = new FormData(formulario);
+    feedback.innerText = "Enviando...";
 
-    // Simula um atraso de 2 segundos (como se fosse uma requisição real)
-    setTimeout(() => {
-        // Feedback de Sucesso
-        feedback.style.color = "green";
-        feedback.innerText = "Mensagem enviada com sucesso!";
-        
-        alert(`Obrigado, ${nome}! Sua mensagem foi enviada com sucesso!`);
-        
-        // Limpa o formulário e reseta o botão
-        formulario.reset();
-        btn.disabled = false;
-        btn.innerText = "Enviar";
-    }, 2000); 
+    try {
+        const response = await fetch('https://formspree.io/f/xgopjolo', {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            feedback.style.color = "green";
+            feedback.innerText = "Mensagem enviada com sucesso!";
+            alert("Mensagem enviada com sucesso! Logo você receberá um e-mail de resposta.");
+            formulario.reset();
+        } else {
+            throw new Error();
+        }
+    } catch (error) {
+        feedback.style.color = "red";
+        feedback.innerText = "Ops! Ocorreu um erro ao enviar.";
+    }
 });
+
+// // --- 2. VALIDAÇÃO E ENVIO DE FORMULÁRIO (SIMULADO) ---
+// const formulario = document.getElementById('formContato');
+// const feedback = document.getElementById('feedback');
+
+// formulario.addEventListener('submit', function(event) {
+//     event.preventDefault(); // Impede o recarregamento da página
+
+//     const nome = document.getElementById('nome').value.trim();
+//     const email = document.getElementById('email').value.trim();
+//     const mensagem = document.getElementById('mensagem').value.trim();
+
+//     if (!nome || !email || !mensagem) {
+//         alert("Por favor, preencha todos os campos obrigatórios!");
+//         return;
+//     }
+
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     if (!emailRegex.test(email)) {
+//         alert("Insira um e-mail válido.");
+//         return;
+//     }
+
+//     // --- LÓGICA DO "SIMULADO" ---
+//     feedback.style.color = "blue";
+//     feedback.innerText = "Processando envio...";
+    
+//     // Desativa o botão para o usuário não clicar duas vezes
+//     const btn = document.getElementById('btnEnviar');
+//     btn.disabled = true;
+//     btn.innerText = "Enviando...";
+
+//     // Simula um atraso de 2 segundos (como se fosse uma requisição real)
+//     setTimeout(() => {
+//         // Feedback de Sucesso
+//         feedback.style.color = "green";
+//         feedback.innerText = "Mensagem enviada com sucesso!";
+        
+//         alert(`Obrigado, ${nome}! Sua mensagem foi enviada com sucesso!`);
+        
+//         // Limpa o formulário e reseta o botão
+//         formulario.reset();
+//         btn.disabled = false;
+//         btn.innerText = "Enviar";
+//     }, 2000); 
+// });
 
 
 // --- 3. LÓGICA DE CERTIFICADOS (ACORDEÃO) ---
